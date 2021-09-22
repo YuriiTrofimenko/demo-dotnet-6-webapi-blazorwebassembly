@@ -18,6 +18,14 @@ namespace WebApiProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:5000", "https://localhost:5001");
+                    });
+            });
             services.AddControllers();
             services.AddSwaggerDocument();
         }
@@ -35,6 +43,8 @@ namespace WebApiProject
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseAuthorization();
 

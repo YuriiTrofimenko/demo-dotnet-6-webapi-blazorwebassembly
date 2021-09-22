@@ -16,9 +16,11 @@ namespace BlazorWebAssemblyProject
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
-
             builder.Services.AddScoped(sp => new HttpClient
-                { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            {
+                // BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+                BaseAddress = new Uri("https://localhost:6001")
+            });
 
             await builder.Build().RunAsync();
         }
